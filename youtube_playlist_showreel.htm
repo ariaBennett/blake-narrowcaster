@@ -101,13 +101,26 @@
          var currentVideoID = player.getVideoData().video_id;
          if (previousVideoID === currentVideoID){
            console.log("Previous video ID matches current video ID.  Skipping" + previousVideoID + " <-Previous | Current-> " + currentVideoID);
-           player.nextVideo();
+           var isLastVideoInPlaylist = player.getPlaylist()[player.getPlaylistIndex()] === player.getVideoData().video_id;
+           if (isLastVideoInPlaylist){
+             console.log('Hit the last video, returning to start.');
+             player.playVideoAt(0);
+           } else {
+             player.nextVideo();
+           }
          } else {
            previousVideoID = currentVideoID;
          }
 
         } else if (event.data === YT.PlayerState.ENDED) {
             player.playVideo(); 
+        } else if (event.data === YT.PlayerState.UNSTARTED) {
+          setTimeout(function(){
+            if (player.getPlayerState() === YT.PlayerState.UNSTARTED) {
+              console.log('Video hasn\'t started after 10 seconds, skipping.');
+              player.nextVideo();
+            }
+          }, 10000);
         }
 
 
