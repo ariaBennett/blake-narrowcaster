@@ -93,11 +93,9 @@
       var done = false;
 
 
-      tests = [];
 
       previousVideoID = "";
       function onPlayerStateChange(event) {
-        tests.push(event);
 
         if (event.data === YT.PlayerState.PLAYING) {
          var currentVideoID = player.getVideoData().video_id;
