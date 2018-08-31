@@ -1,0 +1,89 @@
+body {
+	margin: 0 0 0 0;
+	overflow-y: hidden;
+}
+
+#content {
+	border: 0 solid black;
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden;
+}
+
+a {
+    font-family: verdana;
+    color: #fff;
+    font-size: 11px;   
+}
+
+a:hover {
+    color: #cff;    
+}
+#menu {
+    background: #666;
+    height: 520px;
+	margin-top: -519px;
+    width: 100%; 
+    transition:margin-top 0.5s;
+    -webkit-transition:margin-top 0.5s;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	border: 1px solid #202528;
+	-moz-box-shadow: inset 0 -50px 50px -50px #000;
+    -webkit-box-shadow: inset 0 -50px 50px -50px #000;
+    box-shadow: inset 0 -50px 50px -50px #000;
+}
+
+#menu:hover {
+    height: 520px;   
+	margin-top: 0px;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th {
+	font-family: arial;
+	font-size: 20pt;
+	font-weight: bold;
+	text-align: center;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #aaa;
+}
+
+td {
+	font-family: arial;
+	font-weight: bold;
+	text-align: center;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #aaa;
+}
+
+
+ul {    
+    padding: 0; margin: 0;
+    padding-right: 10px;
+    position: absolute;    
+}
+
+ul li {
+    float: left;
+    display:block;
+    padding: 10px;
+    margin: 0;
+    background: #333;
+    border-right: 1px solid #666
+}
+
+#outset {
+    width: 377px; height: 200px;
+    background: #900;
+    
+}

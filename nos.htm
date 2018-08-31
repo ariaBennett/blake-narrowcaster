@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<style>
+		body {
+			margin: 0 0 0 0;
+		}
+		div {
+			position: relative;
+			width: 1600px;
+			height: 900px;
+			overflow: hidden;
+		}
+		iframe {
+			position: absolute;            
+			top: -340px;
+			left: -224px;
+			width: 1024px;
+			height: 768px;
+		}
+
+		iframe {
+				-ms-zoom: 2;
+				-moz-transform: scale(2);
+				-moz-transform-origin: 0 0;
+				-o-transform: scale(2);
+				-o-transform-origin: 0 0;
+				-webkit-transform: scale(2);
+				-webkit-transform-origin: 0 0;
+				}
+		</style>
+	</head>
+	<body>
+		<div>
+			<iframe id="news" src="https://nos.nl/livestream/npo-nieuws.html" scrolling="no" frameborder="no"></iframe>
+		</div>
+
+		<script>
+		  newsFrame = document.getElementById('news');
+		  newsFrameInner = newsFrame.contentDocument || newsFrame.contentWindow.document;
+			setTimeout(function(){
+			  document.getElementsByClassName('jw-video')[0].muted = false; 
+			}, 6000);
+
+		</script>
+	</body>
+</html>

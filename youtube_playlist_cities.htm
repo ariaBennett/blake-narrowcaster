@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+    
+  <body style="margin: 0px 0px 0px 0px;" bgcolor="#202528">
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player" style="border: solid 0px; margin: 0px 0px 0px 0px; position: absolute; top: 0; left: 0;"></div>
+    <div id="overlay" style="border: solid 0px; margin: 0px 0px 0px 0px; position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; background-image: url('./images/overlay.png');"></div>
+
+
+    <script>
+    
+      // ======================================
+      // ======== START SETUP PLAYLIST ========
+      // ======================================
+    
+      var setPlaylist = 'PLaK3fY8ld0HuPlJhX5YSZCbwQA4uxcpsZ'; //The playlist ID.
+      var setItems = 50; //Total amount of videos in the playlist.
+      var setLengthLastVideo = 21; //Length of the last video in the playlist in seconds.
+      
+      // ======================================
+      // ========= END SETUP PLAYLIST =========
+      // ======================================
+    
+      // 2. This code loads the IFrame Player API code asynchronously
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        
+        player = new YT.Player('player', {
+          height: '1080',
+          width: '1920',
+          playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'showinfo': 0, 'modestbranding': 1 },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+        
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        document.getElementById('player').style.borderColor = '#FF6D00';
+        event.target.setVolume(0);
+        player.setLoop(true),
+        player.loadPlaylist({
+        listType: 'playlist',
+        list: setPlaylist,
+        //index: Math.floor((Math.random() * (setItems - 2)) -1 ),
+        suggestedQuality: 'hd1080',
+        loop: 1
+        });
+		
+		function setShuffleFunction(){
+			player.setShuffle(true);
+		}
+		setTimeout(function(){
+		player.setShuffle(true);
+		}, 1000);  
+
+		
+        
+      }
+      
+      function changeBorderColor(playerStatus) {
+        if (playerStatus == -1) { // unstarted
+          overlay = "url('./images/overlay.png')";
+        } else if (playerStatus == 0) { // ended
+          overlay = "url('./images/overlay_none.png')";
+        } else if (playerStatus == 1) { // playing
+          overlay = "url('./images/overlay_none.png')";
+        } else if (playerStatus == 2) { // paused
+          overlay = "url('./images/overlay_paused.png')";
+        } else if (playerStatus == 3) { // buffering
+          overlay = "url('./images/overlay_buffering.png')";
+        } else if (playerStatus == 5) { // video cued
+          overlay = "url('./images/overlay_none.png')";
+        }
+        if (overlay) {
+          document.getElementById('overlay').style.backgroundImage = overlay;
+        }
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      var done = false;
+      function onPlayerStateChange(event) {
+        changeBorderColor(event.data);
+		if (event.data === YT.PlayerState.ENDED) {
+            player.playVideo(); 
+        }
+        //if (event.data == YT.PlayerState.PLAYING && !done && player.getPlaylistIndex() == (setItems - 2)) {
+        //  setTimeout(loopPlaylist, (setLengthLastVideo*1000)-1000);
+        //  done = true;
+        //}
+      }
+      function loopPlaylist() {
+        player.loadPlaylist({
+            listType: 'playlist',
+            list: setPlaylist,
+            index: 0,
+            suggestedQuality: 'hd1080',
+            loop: 1
+        });
+      }
+    </script>
+  </body>
+</html>
