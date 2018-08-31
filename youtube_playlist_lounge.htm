@@ -92,9 +92,20 @@
       var done = false;
       function onPlayerStateChange(event) {
         changeBorderColor(event.data);
-		if (event.data === YT.PlayerState.ENDED) {
+
+        if (event.data === YT.PlayerState.PLAYING) {
+         var currentVideoID = player.getVideoData().video_id;
+         if (previousVideoID === currentVideoID){
+           console.log("Previous video ID matches current video ID.  Skipping" + previousVideoID + " <-Previous | Current-> " + currentVideoID);
+           player.nextVideo();
+         } else {
+           previousVideoID = currentVideoID;
+         }
+
+        } else if (event.data === YT.PlayerState.ENDED) {
             player.playVideo(); 
         }
+        
         //if (event.data == YT.PlayerState.PLAYING && !done && player.getPlaylistIndex() == (setItems - 2)) {
         //  setTimeout(loopPlaylist, (setLengthLastVideo*1000)-1000);
         //  done = true;
