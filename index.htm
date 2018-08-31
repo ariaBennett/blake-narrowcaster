@@ -1208,7 +1208,7 @@
 		</form>
 	</div>
 	
-	<iframe src="youtube_playlist_showreel.htm" id="content"></iframe>
+	<iframe src="youtube_playlist_showreel.htm" id="content" onload="console.log('Loaded')"></iframe>
 	
 		<script>
 	//Schedule
@@ -1256,7 +1256,8 @@
 		jM : 0,
 		jC : 'frameset_.htm'
 		}));
-	}*/
+	}
+ */
 	if (localStorage.data == undefined) {
 	  localStorage.setItem('data', JSON.stringify({
 	    0 : {
@@ -1523,4 +1524,5 @@
 	  }
 	};
 	init();
+
 	</script>
